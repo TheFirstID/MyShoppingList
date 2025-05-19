@@ -1,9 +1,9 @@
-import {Text, View} from "react-native"
+import {Text, TouchableOpacity} from "react-native"
 import { style } from "./Title.style"
 
-export function Title(){
+export function Title({setSection}){
     return ( 
-    <View style={style.container_title}>
+    <TouchableOpacity style={style.container_title} onPress={()=>setSection("all")}>
         <Text style={style.txt_title}>MyShoppingList</Text>
-    </View>
+    </TouchableOpacity>
 )}

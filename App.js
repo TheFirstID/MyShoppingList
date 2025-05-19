@@ -9,6 +9,7 @@ import { ArticleCard } from "./components/ArticleCard/ArticleCard";
 import { Footer } from "./components/Footer/Footer";
 
 export default function App() {
+  const [section, setSection] = useState("notfound");
   const [articles, setArticles] = useState([
     {
       id: 1,
@@ -47,36 +48,48 @@ export default function App() {
     },
   ]);
 
-function articlesList(articles) {
-  return articles.map((article) => (
-      <ArticleCard key={article.id} article={article} onPress={changeStatus} />
-  ));
-}
-
-function changeStatus(article){
-  // Création d'un nouvel objet mis a jour 
-  const updateArticle = {
-    ...article, 
-    checked: !article.checked
+  function filterArticles() {
+    switch (section) {
+      case "all":
+        return articles;
+      case "find":
+        return articles.filter((ar) => ar.checked);
+      case "notfound":
+        return articles.filter((ar) => !ar.checked);
+    }
   }
 
- const indexArticle = articles.findIndex((article)=> article.id === updateArticle.id)
- const newArticlesList = [...articles]
- newArticlesList[indexArticle] = updateArticle
- setArticles(newArticlesList)
-}
+  function articlesList() {
+    return filterArticles().map((article) => (
+      <ArticleCard key={article.id} article={article} onPress={changeStatus} />
+    ));
+  }
+
+  function changeStatus(article) {
+    const updateArticle = {
+      ...article,
+      checked: !article.checked,
+    };
+
+    const indexArticle = articles.findIndex(
+      (article) => article.id === updateArticle.id
+    );
+    const newArticlesList = [...articles];
+    newArticlesList[indexArticle] = updateArticle;
+    setArticles(newArticlesList);
+  }
   return (
     <SafeAreaProvider>
       <SafeAreaView
         style={{ flex: 1, paddingHorizontal: 10, backgroundColor: "#FFD700" }}
       >
-        <Title />
+        <Title setSection={setSection}/>
         <View style={style.container_body}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {articlesList(articles)}
           </ScrollView>
         </View>
-        <Footer />
+        <Footer setSection={setSection} />
       </SafeAreaView>
     </SafeAreaProvider>
   );

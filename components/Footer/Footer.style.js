@@ -7,4 +7,13 @@ export const style = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center"
   },
+  btn_add_container:{
+    backgroundColor: "black", 
+    padding: 10, 
+    borderRadius: 50,
+  },
+  img_footer:{
+    width: 40, 
+    height: 40
+  }
 });
