@@ -1,14 +1,15 @@
-import {Text, View, Image} from "react-native"
+import {Text, Image, TouchableOpacity} from "react-native"
 import { style } from "./ArticleCard.style"
 
 // Importation des icons des cartes article 
-import iconEmptyShoppingCard from "../../assets/Icons/caddieVide.png"
+import iconEmptyShoppingCart from "../../assets/Icons/caddieVide.png"
+import iconFullShoppingCart from "../../assets/Icons/caddieRempli.png"
 
-export function ArticleCard({articleName}){
+export function ArticleCard({article, onPress}){
     return (
-        <View style={style.container_card}>
-            <Text style={style.txt_article}>{articleName}</Text>
-            <Image style={style.icon_card} source={iconEmptyShoppingCard}/>
-        </View>
+        <TouchableOpacity onPress={()=>onPress(article)} style={style.container_card}>
+            <Text style={style.txt_article}>{article.name}</Text>
+            {article.checked === false ? <Image style={style.icon_card} source={iconEmptyShoppingCart}/> : <Image style={style.icon_card} source={iconFullShoppingCart}/>}
+        </TouchableOpacity>
     )
 }

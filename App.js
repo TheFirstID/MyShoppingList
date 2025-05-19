@@ -11,34 +11,60 @@ import { Footer } from "./components/Footer/Footer";
 export default function App() {
   const [articles, setArticles] = useState([
     {
-        name: "Pain", 
-        checked: false
+      id: 1,
+      name: "Pain",
+      checked: false,
     },
     {
-        name: "Confiture", 
-        checked: false
+      id: 2,
+      name: "Confiture",
+      checked: false,
     },
     {
-        name: "Dentifrice", 
-        checked: false
+      id: 3,
+      name: "Dentifrice",
+      checked: false,
     },
     {
-        name: "Nutella", 
-        checked: false
+      id: 4,
+      name: "Nutella",
+      checked: true,
     },
     {
-        name: "Viande", 
-        checked: false
+      id: 5,
+      name: "Viande",
+      checked: false,
     },
     {
-        name: "Fromage", 
-        checked: false
+      id: 6,
+      name: "Fromage",
+      checked: false,
     },
     {
-        name: "Salade", 
-        checked: false
+      id: 7,
+      name: "Salade",
+      checked: true,
     },
-  ])
+  ]);
+
+function articlesList(articles) {
+  return articles.map((article) => (
+      <ArticleCard key={article.id} article={article} onPress={changeStatus} />
+  ));
+}
+
+function changeStatus(article){
+  // Création d'un nouvel objet mis a jour 
+  const updateArticle = {
+    ...article, 
+    checked: !article.checked
+  }
+
+ const indexArticle = articles.findIndex((article)=> article.id === updateArticle.id)
+ const newArticlesList = [...articles]
+ newArticlesList[indexArticle] = updateArticle
+ setArticles(newArticlesList)
+}
   return (
     <SafeAreaProvider>
       <SafeAreaView
@@ -47,13 +73,7 @@ export default function App() {
         <Title />
         <View style={style.container_body}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {articles.map((article, index) => {
-              return (
-                <TouchableOpacity key={index} onPress={()=>console.log(article.name)}>
-                  <ArticleCard articleName={article.name} />
-                </TouchableOpacity>
-              );
-            })}
+            {articlesList(articles)}
           </ScrollView>
         </View>
         <Footer />
