@@ -1,4 +1,4 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { style } from "./app.style";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
@@ -10,6 +10,7 @@ import { Footer } from "./components/Footer/Footer";
 
 // Importation des services 
 import { deleteArticle } from "./services/Alerts";
+import { numberOfItemsToFind } from "./services/Helper";
 
 export default function App() {
   const [section, setSection] = useState("notfound");
@@ -86,7 +87,7 @@ export default function App() {
       <SafeAreaView
         style={{ flex: 1, paddingHorizontal: 10, backgroundColor: "#FFD700" }}
       >
-        <Title setSection={setSection}/>
+        <Title setSection={setSection} numberOfItemsToFind={numberOfItemsToFind(articles)}/>
         <View style={style.container_body}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {articlesList(articles)}

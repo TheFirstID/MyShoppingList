@@ -10,5 +10,6 @@ export const style = StyleSheet.create({
     txt_title:{
         fontSize: 25,
         fontWeight: "bold", 
+        paddingBottom: 5
     }
 })
