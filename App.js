@@ -8,6 +8,9 @@ import { Title } from "./components/Title/Title";
 import { ArticleCard } from "./components/ArticleCard/ArticleCard";
 import { Footer } from "./components/Footer/Footer";
 
+// Importation des services 
+import { deleteArticle } from "./services/Alerts";
+
 export default function App() {
   const [section, setSection] = useState("notfound");
   const [articles, setArticles] = useState([
@@ -61,7 +64,7 @@ export default function App() {
 
   function articlesList() {
     return filterArticles().map((article) => (
-      <ArticleCard key={article.id} article={article} onPress={changeStatus} />
+      <ArticleCard key={article.id} article={article} onPress={changeStatus}  onLongPress={()=>deleteArticle(article)} />
     ));
   }
 
