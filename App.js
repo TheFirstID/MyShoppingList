@@ -64,7 +64,7 @@ export default function App() {
 
   function articlesList() {
     return filterArticles().map((article) => (
-      <ArticleCard key={article.id} article={article} onPress={changeStatus}  onLongPress={()=>deleteArticle(article)} />
+      <ArticleCard key={article.id} article={article} onPress={changeStatus}  onLongPress={()=>deleteArticle(articles, setArticles, article)} />
     ));
   }
 

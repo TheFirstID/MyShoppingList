@@ -1,9 +1,9 @@
 import { Alert } from "react-native";
 
-function deleteArticle(article) {
+function deleteArticle(articles, setArticles, currentArticle) {
   Alert.alert(
     "Supprimer cet Article ?",
-    `Vous êtes sur le point de supprimer "${article.name}" de votre liste d'article, êtes-vous sûr ?`,
+    `Vous êtes sur le point de supprimer "${currentArticle.name}" de votre liste d'article, êtes-vous sûr ?`,
     [
       {
         text: "Annuler",
@@ -11,7 +11,10 @@ function deleteArticle(article) {
       },
       {
         text: "Supprimer", 
-        onPress: ()=> console.log('Article supprimé'),
+        onPress: ()=> {
+            // Retourne une liste d'article dont l'id est différent de celui à supprimer.
+            setArticles(articles.filter((articlesInList) => articlesInList.id !== currentArticle.id))
+        },
         style: "destructive"
       },
     ]
